@@ -10,6 +10,13 @@ LOG_FILE = "./Git_logs/Call_logs.txt"
 
 @app.route("/predict/", methods=["POST"])
 def post_json():
+    """
+    Receives request as a json sent by the python script placed in the .git/git_hooks directory
+     of the repository. Processes the data and and predicts the risk index for that commit based on the model
+     created in the Training directory by invoking the Predictor.Predictor class
+
+    :return: Http response indicating the risk index
+    """
 
     # For sending data as a file
     #
@@ -63,6 +70,10 @@ def print_log():
 
 
 if __name__ == '__main__':
+
+    """
+    Driver code to start the api on server, port no = 5000
+    """
     model_filename = "./Training/rf_model_del.pkl"
     model = Predictor.load_model(model_filename)
 

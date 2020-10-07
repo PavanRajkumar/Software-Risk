@@ -1,0 +1,303 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Predictor package &mdash; Risk-Index 1.0.0 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home" alt="Documentation Home"> Risk-Index
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <!-- Local TOC -->
+              <div class="local-toc"><ul>
+<li><a class="reference internal" href="#">Predictor package</a><ul>
+<li><a class="reference internal" href="#submodules">Submodules</a></li>
+<li><a class="reference internal" href="#module-Predictor.Predictor">Predictor.Predictor module</a></li>
+<li><a class="reference internal" href="#module-Predictor">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</div>
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Risk-Index</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>Predictor package</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/Predictor.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="predictor-package">
+<h1>Predictor package<a class="headerlink" href="#predictor-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-Predictor.Predictor">
+<span id="predictor-predictor-module"></span><h2>Predictor.Predictor module<a class="headerlink" href="#module-Predictor.Predictor" title="Permalink to this headline">¶</a></h2>
+<dl class="py function">
+<dt id="Predictor.Predictor.extract_info">
+<code class="sig-prename descclassname">Predictor.Predictor.</code><code class="sig-name descname">extract_info</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">stdout</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Predictor.Predictor.extract_info" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function is called to structure the data received on executing the git bash command.
+The author, commit message, number of lines, lines added and lines deleted, files changes are extracted from it and</p>
+<blockquote>
+<div><p>converted into a pandas.DataFrame. Later,the message length is also added to it.</p>
+<p>First it checks if the length of the stdout array is less than 4, if so it indicates that no files were changed
+hence it cannot predict the risk index due to insufficient data.</p>
+</div></blockquote>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>stdout</strong> – </p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="Predictor.Predictor.get_latest_commit_details">
+<code class="sig-prename descclassname">Predictor.Predictor.</code><code class="sig-name descname">get_latest_commit_details</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Predictor.Predictor.get_latest_commit_details" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function is called to obtain the latest commit by executing the git bash command.
+However, this function is not used since the python script handles this part.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The output resulting on executing the git bash command</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="Predictor.Predictor.load_model">
+<code class="sig-prename descclassname">Predictor.Predictor.</code><code class="sig-name descname">load_model</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">model_filename</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Predictor.Predictor.load_model" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function is used to load the trained model for prediction from the specified file location.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>model_filename</strong> – Location of the trained model (String)</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>model instance</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="Predictor.Predictor.predict">
+<code class="sig-prename descclassname">Predictor.Predictor.</code><code class="sig-name descname">predict</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">data</span></em>, <em class="sig-param"><span class="n">model</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Predictor.Predictor.predict" title="Permalink to this definition">¶</a></dt>
+<dd><p>For predicting the risk index of the commit.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data</strong> – numpy array containing the attribute values for the commit.</p></li>
+<li><p><strong>model</strong> – model created by invoking load_model</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Probability of risk</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="Predictor.Predictor.process_df">
+<code class="sig-prename descclassname">Predictor.Predictor.</code><code class="sig-name descname">process_df</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">df</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Predictor.Predictor.process_df" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function is used to convert the data such as commit messages, author names into an array of keywords
+and/or map it to intger values or label encode them.
+:param df:
+:return:</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="Predictor.Predictor.reshape_np">
+<code class="sig-prename descclassname">Predictor.Predictor.</code><code class="sig-name descname">reshape_np</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">stdout</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Predictor.Predictor.reshape_np" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function is used to convert the pandas.DataFrame into a numpy array and reshape into the dimension of (1,6)
+i.e. (rows, columns) so that the model is able to process it</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>stdout</strong> – DataFrame containing the attribute values</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>np.ndarray of dimension (1,6)</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="module-Predictor">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-Predictor" title="Permalink to this headline">¶</a></h2>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 2020, Richard Delwin Myloth, Pavan Rajkumar
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

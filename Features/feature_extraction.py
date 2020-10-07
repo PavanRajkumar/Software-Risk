@@ -1,9 +1,10 @@
-# Author : Richard Delwin Myloth
-
+""""
+@author : Richard Delwin Myloth
+"""
 
 import string
 import re
-from .author_details import AuthorDetails
+from Features.author_details import AuthorDetails
 import random
 
 
@@ -11,10 +12,30 @@ import random
 # input : dataframe and column name
 class Size:
 
+    """
+    This class is used to remove non-numeric data, leaving behind only numeric data
+    also accounts for removing whitespaces which might be present for merge commits
+    """
+
     def __init__(self, data):
+        """
+        :param data: the dataframe consisting of the columns -
+         * files changed
+         * lines added
+         * lines deleted
+         from which non-numeric data are removed inplace (type - pandas.DataFrame)
+        """
         self.data = data
 
     def keep_numeric_data(self, column_name):
+
+        """
+
+        :param column_name: could be (intended for) files changed, lines added, lines deleted
+            but can also be used for any other column which is supposed to be having only numeric data
+            (type - String)
+        :return: None
+        """
 
         for row_num in range(self.data.shape[0]):
 
@@ -33,21 +54,29 @@ class Size:
                 if not error_ and numeric_data:
                     self.data[column_name].iloc[row_num] = int(numeric_data)
 
-        return 1
+        return
 
 
-# To extract keywords from the commit messages
-# input : dataframe
+
 class Key:
-
-    def __init__(self, data):
-
-        # the keywords classified into five categories
+    """
+    To extract keywords from the commit messages
+    # the keywords classified into five categories
         # 1. corrective ("fix""bug", "wrong", "fail", "problem")
         # 2. addition, ("new", "add", "requirement", "initial", "create")
         # 3. non functional ("doc", "merge")
         # 4. perfective ("clean", "better")
         # 5. preventive ("test", "junit", "coverage", "assert")
+    """
+
+    def __init__(self, data):
+
+        """
+            :param data: the dataframe consisting of the commit messages from
+             which the keywords are extracted, mapped to integer values and cleaned inplace (type - pandas.DataFrame)
+        """
+
+
         self.data = data
 
         self.keywords = {"fix": 9, "bug": 9, "wrong": 9, "fail": 9, "problem": 9, "imp": 8,
@@ -58,9 +87,14 @@ class Key:
                          }
 
     def map_keywords_to_val(self, column_name):
+        """
 
-        #Lines are commented to just find the keywords and sort them rather than assigning values
+        :param column_name: comment (type - String)
+        :return: None
 
+        The commented parts: -
+        + Lines are commented to just find the keywords and sort them rather than assigning values
+        """
         i = 0
         z = 0
         self.data["msg_len"] = [0 for _ in range(self.data.shape[0])]
@@ -102,9 +136,29 @@ class Key:
 
 # To map authors to randomly assigned experience values
 class Authors:
+    """
+        This class is concerned with extracting author names and mapping them to a numeric value
 
-    # author commit exp, auth seniority
+        ******************************************************************************************************
+        ** However this class isn't used, instead the author_details.py is used to just clean author names ***
+        ******************************************************************************************************
+
+        Done:
+            extract names
+            map values from distinct string to integers
+
+        Additional:
+            * extract number of commits for an author
+        """
+
+
     def __init__(self, data, column_name):
+        """
+
+        :param data: The DataFrame consisting of authors
+        :param column_name: author
+        """
+
         self.data = data
         self.column_name = column_name
         # author = AuthorDetails(self.data)
@@ -118,6 +172,14 @@ class Authors:
         self.author_rating["RichardDelwin"] = 12
 
     def map_author_to_val(self):
+
+        """
+        This function was intended to clean author names and map them to integer values
+        which could have been an indication for author commit experience, author's seniority etc.
+        :return: Dictionary of authors
+
+        """
+
         i = 0
         for row_num in range(self.data.shape[0]):
 

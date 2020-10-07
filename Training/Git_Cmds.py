@@ -1,5 +1,6 @@
-# Author : Richard Delwin Myloth
-
+"""
+@author : Richard Delwin Myloth, Pavan Rajkumar
+"""
 import re
 from collections import defaultdict
 from subprocess import check_output
@@ -7,16 +8,34 @@ from subprocess import check_output
 
 def run_bash_command(bash_cmd):
 
+    """
+    To execute the git bash command
+
+    :param bash_cmd: The git bash commmand executed to get the commit details.
+    :return:  The result of the bash command executed which is split and decoded.
+    """
+
     stdout = check_output(bash_cmd.split()).decode('utf-8').rstrip('\n')
     return stdout
 
 
 def trim_hash(commit):
+    """
+    Trims commit's hash id
+    :param commit: commit id
+    :return: commit id trimmed to first 8 places
+    """
 
     return commit[:8]
 
 
 def get_latest_commit():
+    """
+    To get the latest commit, this commit is not used since it is used in the
+    python script located in .git/git_hooks directory to execute this.
+
+    :return: git output of the latest commit details
+    """
 
     bash_cmd = 'git log -1 --pretty=format:"%H"'
 
@@ -29,6 +48,16 @@ def get_latest_commit():
 
 
 def get_bugfix_commits():
+
+    """
+    This function is used to obtain all the commit id which have BUG or FIX in their commit messages which indicate
+    that, that particular commit was used to fix a bug which was identified.
+
+    Raises ValueError if not buggy commits are found. This may be due to the fact that the repository might be a small one,
+    or the commit messages are not approprately labelled as BUG or FIX
+
+    :return: List of commit ids which fixed a bug
+    """
 
     bash_cmd = "git log -i --all --grep BUG --grep FIX --pretty=format:%h"
 
@@ -45,6 +74,13 @@ def get_bugfix_commits():
 
 def _get_commit_filenames(commit_hash):
 
+    """
+    This function is used to get the files which were affected by a commit id.
+
+    :param commit_hash: commit id
+    :return: list of filenames
+
+    """
 
     commit_hash = trim_hash(commit_hash)
 
@@ -60,7 +96,12 @@ def _get_commit_filenames(commit_hash):
 
 
 def _get_commit_lines(commit_hash, filenames):
-
+    """
+    The function is used to obtain the lines which were modified by the commit id in that particular file given by the filename
+    :param commit_hash: commit id
+    :param filenames: list of filenames modified by commit id
+    :return: Lines affected
+    """
 
     commit_hash = trim_hash(commit_hash)
     fname_lines = defaultdict(lambda: [])
@@ -95,6 +136,16 @@ def _get_commit_lines(commit_hash, filenames):
 
 def _get_blame_commit(commit_hash, filenames, fname_lines):
 
+    """
+    This function is used to obtain the commit id (buggy commits) responsible for introducing lines which were
+    changed in the file (filenames) by the commit id (commit_hash).
+
+    :param commit_hash: commit id
+    :param filenames: files modifies by commit_hash
+    :param fname_lines: lines modified in the file (i.e. filenames)
+    :return: commit ids which introduced the bug
+    """
+
 
     commit_hash = trim_hash(commit_hash)
     buggy_commits = set()
@@ -120,6 +171,14 @@ def _get_blame_commit(commit_hash, filenames, fname_lines):
 
 
 def link_fixes_to_bugs(fix_commits):
+
+    """
+    This function is used to find those commits responsible for introducing bugs into the software
+
+    :param fix_commits: list of commit ids obtained from Git_Cmds.get_bugfix_commits() which
+                        indicate the commits which were used to fix a bug (type - list of Strings)
+    :return: List of commit ids which introduces the bug
+    """
 
 
     bug_commits = set()

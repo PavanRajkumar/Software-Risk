@@ -1,0 +1,474 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Training package &mdash; Risk-Index 1.0.0 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home" alt="Documentation Home"> Risk-Index
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <!-- Local TOC -->
+              <div class="local-toc"><ul>
+<li><a class="reference internal" href="#">Training package</a><ul>
+<li><a class="reference internal" href="#submodules">Submodules</a></li>
+<li><a class="reference internal" href="#module-Training.Git_Cmds">Training.Git_Cmds module</a></li>
+<li><a class="reference internal" href="#module-Training.Pre_processing">Training.Pre_processing module</a></li>
+<li><a class="reference internal" href="#module-Training.create_model">Training.create_model module</a></li>
+<li><a class="reference internal" href="#module-Training.gitvc">Training.gitvc module</a></li>
+<li><a class="reference internal" href="#module-Training.parsing">Training.parsing module</a></li>
+<li><a class="reference internal" href="#module-Training">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</div>
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Risk-Index</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>Training package</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/Training.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="training-package">
+<h1>Training package<a class="headerlink" href="#training-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-Training.Git_Cmds">
+<span id="training-git-cmds-module"></span><h2>Training.Git_Cmds module<a class="headerlink" href="#module-Training.Git_Cmds" title="Permalink to this headline">¶</a></h2>
+<p>&#64;author : Richard Delwin Myloth, Pavan Rajkumar</p>
+<dl class="py function">
+<dt id="Training.Git_Cmds.get_bugfix_commits">
+<code class="sig-prename descclassname">Training.Git_Cmds.</code><code class="sig-name descname">get_bugfix_commits</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Training.Git_Cmds.get_bugfix_commits" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function is used to obtain all the commit id which have BUG or FIX in their commit messages which indicate
+that, that particular commit was used to fix a bug which was identified.</p>
+<p>Raises ValueError if not buggy commits are found. This may be due to the fact that the repository might be a small one,
+or the commit messages are not approprately labelled as BUG or FIX</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>List of commit ids which fixed a bug</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="Training.Git_Cmds.get_latest_commit">
+<code class="sig-prename descclassname">Training.Git_Cmds.</code><code class="sig-name descname">get_latest_commit</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Training.Git_Cmds.get_latest_commit" title="Permalink to this definition">¶</a></dt>
+<dd><p>To get the latest commit, this commit is not used since it is used in the
+python script located in .git/git_hooks directory to execute this.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>git output of the latest commit details</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="Training.Git_Cmds.link_fixes_to_bugs">
+<code class="sig-prename descclassname">Training.Git_Cmds.</code><code class="sig-name descname">link_fixes_to_bugs</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">fix_commits</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Training.Git_Cmds.link_fixes_to_bugs" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function is used to find those commits responsible for introducing bugs into the software</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>fix_commits</strong> – list of commit ids obtained from Git_Cmds.get_bugfix_commits() which
+indicate the commits which were used to fix a bug (type - list of Strings)</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>List of commit ids which introduces the bug</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="Training.Git_Cmds.run_bash_command">
+<code class="sig-prename descclassname">Training.Git_Cmds.</code><code class="sig-name descname">run_bash_command</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">bash_cmd</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Training.Git_Cmds.run_bash_command" title="Permalink to this definition">¶</a></dt>
+<dd><p>To execute the git bash command</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>bash_cmd</strong> – The git bash commmand executed to get the commit details.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The result of the bash command executed which is split and decoded.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="Training.Git_Cmds.trim_hash">
+<code class="sig-prename descclassname">Training.Git_Cmds.</code><code class="sig-name descname">trim_hash</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">commit</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Training.Git_Cmds.trim_hash" title="Permalink to this definition">¶</a></dt>
+<dd><p>Trims commit’s hash id
+:param commit: commit id
+:return: commit id trimmed to first 8 places</p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-Training.Pre_processing">
+<span id="training-pre-processing-module"></span><h2>Training.Pre_processing module<a class="headerlink" href="#module-Training.Pre_processing" title="Permalink to this headline">¶</a></h2>
+<dl class="py function">
+<dt id="Training.Pre_processing.Label_encode">
+<code class="sig-prename descclassname">Training.Pre_processing.</code><code class="sig-name descname">Label_encode</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">data</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Training.Pre_processing.Label_encode" title="Permalink to this definition">¶</a></dt>
+<dd><blockquote>
+<div><p>This function is used to label encode comment and author names (inplace). This is used now but can be
+substituted by the function in Features directory which maps to numeric values.</p>
+</div></blockquote>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>data</strong> – Training data (type - pandas.DataFrame)</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="Training.Pre_processing.remove_non_numeric_data">
+<code class="sig-prename descclassname">Training.Pre_processing.</code><code class="sig-name descname">remove_non_numeric_data</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">data</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Training.Pre_processing.remove_non_numeric_data" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function is used to remove non-numeric data (inplace) which might be present (quite rare) in
+the column intended for numeric data.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>data</strong> – The training data (type - pandas.DataFrame)</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="Training.Pre_processing.removing_outliers">
+<code class="sig-prename descclassname">Training.Pre_processing.</code><code class="sig-name descname">removing_outliers</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">data</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Training.Pre_processing.removing_outliers" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function is used to remove any outliers in the data. They generally emerge from the commit by bots
+which tend to have a very large number of lines added due to formatting.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>data</strong> – the DataFrame containing the attributes an dthe target variable</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="module-Training.create_model">
+<span id="training-create-model-module"></span><h2>Training.create_model module<a class="headerlink" href="#module-Training.create_model" title="Permalink to this headline">¶</a></h2>
+<p>&#64;author : Richard Delwin Myloth</p>
+<dl class="py function">
+<dt id="Training.create_model.create_model">
+<code class="sig-prename descclassname">Training.create_model.</code><code class="sig-name descname">create_model</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">MODEL_LOCATION</span><span class="o">=</span><span class="default_value">'rf_model.pkl'</span></em>, <em class="sig-param"><span class="n">DATA_LOCATION</span><span class="o">=</span><span class="default_value">'./cleaned_data_latest.csv'</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Training.create_model.create_model" title="Permalink to this definition">¶</a></dt>
+<dd><blockquote>
+<div><p>Reads the csv file created containing the pre - processed training data.
+This functoin creates a RandomForest model and stores the created model
+as rf_model.pkl</p>
+<p>This function also calls create_model.undersample and drops those instances
+with missing values.</p>
+</div></blockquote>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>MODEL_LOCATION</strong> – specifies the location of the model created</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="Training.create_model.undersample">
+<code class="sig-prename descclassname">Training.create_model.</code><code class="sig-name descname">undersample</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">X</span></em>, <em class="sig-param"><span class="n">y</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Training.create_model.undersample" title="Permalink to this definition">¶</a></dt>
+<dd><p>Undersampling of the dataset to balance the data to prevent bias. Especially in this scenario where the number
+of non-buggy commits might be far larger than buggy commits.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>X</strong> – The attributes (type = pandas.DataFrame)</p></li>
+<li><p><strong>y</strong> – The target variable (type = pandas.DataFrame)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p></p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="module-Training.gitvc">
+<span id="training-gitvc-module"></span><h2>Training.gitvc module<a class="headerlink" href="#module-Training.gitvc" title="Permalink to this headline">¶</a></h2>
+<p>&#64;Author: Richard Delwin Myloth, Pavan Rajkumar</p>
+<p>Gitvc.ipynb</p>
+<p>Colaboratory File (used for prototyping):
+<a class="reference external" href="https://colab.research.google.com/drive/1MP0cSkbEu9bgC1NkQLKZy1Elgdqmag8c">https://colab.research.google.com/drive/1MP0cSkbEu9bgC1NkQLKZy1Elgdqmag8c</a></p>
+<dl class="py function">
+<dt id="Training.gitvc.extract_keywords">
+<code class="sig-prename descclassname">Training.gitvc.</code><code class="sig-name descname">extract_keywords</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Training.gitvc.extract_keywords" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function is used to extract keywords from commit messages and to map them to a numeric value.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="Training.gitvc.extract_num">
+<code class="sig-prename descclassname">Training.gitvc.</code><code class="sig-name descname">extract_num</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Training.gitvc.extract_num" title="Permalink to this definition">¶</a></dt>
+<dd><p>To converted numbers represented as a String into numeric values
+:return: None</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="Training.gitvc.fill_na">
+<code class="sig-prename descclassname">Training.gitvc.</code><code class="sig-name descname">fill_na</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Training.gitvc.fill_na" title="Permalink to this definition">¶</a></dt>
+<dd><p>To fill missing values with 0 for columns containing numeric data</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="Training.gitvc.label_bugs">
+<code class="sig-prename descclassname">Training.gitvc.</code><code class="sig-name descname">label_bugs</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Training.gitvc.label_bugs" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function is used to invoke the Training.parsing.get_labels() to obtain the buggy commit_id
+which are mapped to raw data to create the target attribute. All non-buggy commits are labelled as
+0 and buggy commits are labelled as 1. The resulting new column is created inplace.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="Training.gitvc.map_authors">
+<code class="sig-prename descclassname">Training.gitvc.</code><code class="sig-name descname">map_authors</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Training.gitvc.map_authors" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function is used to map authors to certain numeric values by invoking authors
+:return:</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="Training.gitvc.misc">
+<code class="sig-prename descclassname">Training.gitvc.</code><code class="sig-name descname">misc</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Training.gitvc.misc" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function is used to remove certain instances which are unique to a repository.
+This functiion is not used since it is handled by git commands.
+:return: None</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="Training.gitvc.remove_merge_commits">
+<code class="sig-prename descclassname">Training.gitvc.</code><code class="sig-name descname">remove_merge_commits</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">data</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Training.gitvc.remove_merge_commits" title="Permalink to this definition">¶</a></dt>
+<dd><blockquote>
+<div><p>Removes those commits (inplace) which are introduced due to merging of branches.
+These commits does not contribute any information</p>
+</div></blockquote>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>data</strong> – The DataFrame containg the raw data extracted by executing the git command (type - pandas.DataFrame)</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="Training.gitvc.save_dataset">
+<code class="sig-prename descclassname">Training.gitvc.</code><code class="sig-name descname">save_dataset</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">DATASET_LOCATION</span><span class="o">=</span><span class="default_value">'./cleaned_data_latest.csv'</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Training.gitvc.save_dataset" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function is used to save the csv file pre-processsing so that it could be used to train the model.
+:return: None</p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-Training.parsing">
+<span id="training-parsing-module"></span><h2>Training.parsing module<a class="headerlink" href="#module-Training.parsing" title="Permalink to this headline">¶</a></h2>
+<dl class="py function">
+<dt id="Training.parsing.get_labels">
+<code class="sig-prename descclassname">Training.parsing.</code><code class="sig-name descname">get_labels</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Training.parsing.get_labels" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function is used to get the those commit id of those commits which would have previously introduced bugs
+:return: A list of commit id which are found to be buggy</p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-Training">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-Training" title="Permalink to this headline">¶</a></h2>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 2020, Richard Delwin Myloth, Pavan Rajkumar
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

@@ -1,4 +1,7 @@
-# Author : Richard Delwin Myloth
+"""
+@author : Richard Delwin Myloth
+"""
+
 from sklearn.ensemble import RandomForestClassifier
 import pandas as pd
 import pickle
@@ -7,7 +10,16 @@ from collections import Counter
 from sklearn.metrics import accuracy_score, recall_score, precision_score, confusion_matrix, f1_score
 from sklearn.model_selection import train_test_split
 
+
 def undersample(X, y):
+    """
+    Undersampling of the dataset to balance the data to prevent bias. Especially in this scenario where the number
+    of non-buggy commits might be far larger than buggy commits.
+
+    :param X: The attributes (type = pandas.DataFrame)
+    :param y: The target variable (type = pandas.DataFrame)
+    :return:
+    """
 
     print("Before undersampling : Dataset  = ", Counter(y))
 
@@ -17,8 +29,23 @@ def undersample(X, y):
 
     return
 
-def create_model():
-    data = pd.read_csv("./cleaned_data_latest.csv",
+
+def create_model(MODEL_LOCATION="rf_model.pkl", DATA_LOCATION="./cleaned_data_latest.csv"):
+    """
+        Reads the csv file created containing the pre - processed training data.
+        This functoin creates a RandomForest model and stores the created model
+        as rf_model.pkl
+
+        This function also calls create_model.undersample and drops those instances
+        with missing values.
+
+    :param MODEL_LOCATION: specifies the location of the model created
+    :return: None
+
+    """
+    # MODEL_LOCATION = "rf_model.pkl"
+
+    data = pd.read_csv(DATA_LOCATION,
                        names=list(
                            "author,comment,changed files,lines added,lines deleted,msg_len,buggy".split(",")))
 
@@ -31,13 +58,14 @@ def create_model():
     X = data.drop(columns=["buggy"], axis=1)
     undersample(X, y)
 
-    ##for model stats
+    # for model stats
+
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.20, random_state=42)
     clf = RandomForestClassifier(random_state=42)
     clf.fit(X_train, y_train)
     y_pred = clf.predict(X_test)
 
-    print("Accuracy : ", accuracy_score(y_test, y_pred)*100)
+    print("Accuracy : ", accuracy_score(y_test, y_pred) * 100)
     print("Confusion matrix: \n", confusion_matrix(y_test, y_pred))
     # print("Recall : ", recall_score(y_test, y_pred))
     # print("Precision : ", precision_score(y_test, y_pred))
@@ -46,12 +74,10 @@ def create_model():
     clf = RandomForestClassifier(random_state=40)
     clf.fit(X, y)
 
-    pkl_filename = "rf_model_del.pkl"
-    with open(pkl_filename, 'wb') as file:
+    with open(MODEL_LOCATION, 'wb') as file:
         pickle.dump(clf, file)
 
     print(">>Model Saved<<")
 
+
 create_model()
-
-
